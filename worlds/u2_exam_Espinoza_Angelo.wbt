@@ -1,0 +1,27 @@
+#VRML_SIM R2019a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.4349492529667369 0.8749433965591233 0.2128219917237455 0.9904264650142386
+  position 2.1709550135038223 1.4095378268233523 1.7283236357165013
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+}
+Robot {
+  children [
+    DEF BODY_GR Group {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            roughness 1
+            metalness 0
+          }
+        }
+      ]
+    }
+  ]
+}
