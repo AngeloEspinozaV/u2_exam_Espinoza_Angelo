@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.42797007761499956 -0.8134150505706998 -0.3939512256247934 1.6941697627805254
-  position -1.3227421701090742 1.6892131793522918 0.2533364069921693
+  orientation -0.7001396348506815 -0.570561985485325 -0.4292592601566081 1.6426491628800033
+  position -0.17857098643001124 0.2800136111480608 -0.09659875845045918
 }
 TexturedBackground {
 }
@@ -51,7 +51,7 @@ Robot {
           ]
         }
         Transform {
-          translation -0.11 0.03 -0.00069
+          translation -0.11 0.025 -0.00069
           rotation 0 1 0 3.921592644
           children [
             Shape {
@@ -60,7 +60,7 @@ Robot {
                 coord Coordinate {
                   point [
                     0.09 0 -0.09
-                    -0.15 0 -0.15
+                    -0.155 0 -0.155
                     -0.09 0 0.09
                   ]
                 }
@@ -68,6 +68,71 @@ Robot {
                   0, 1, 2, -1
                 ]
               }
+            }
+          ]
+        }
+      ]
+    }
+    DEF WHEELS_GR Group {
+      children [
+        Transform {
+          translation -0.118 0 -0.14
+          rotation 0 1 0 0.52
+          children [
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis 0 0 1
+              }
+              endPoint Solid {
+                rotation 0 0 1 0
+                children [
+                  DEF WHEEL_TR Transform {
+                    rotation 1 0 0 1.57
+                    children [
+                      DEF WHEELS_SH Shape {
+                        appearance DEF COLOR_WHEEL PBRAppearance {
+                          baseColor 0 0 0
+                          roughness 1
+                          metalness 0
+                        }
+                        geometry DEF SIZE_WHEEL Cylinder {
+                          height 0.03
+                          radius 0.04
+                        }
+                      }
+                    ]
+                  }
+                ]
+                name "solid(2)"
+                boundingObject USE WHEEL_TR
+                physics Physics {
+                }
+              }
+            }
+            Transform {
+              translation -7.963267107332634e-06 0.040000003170681656 0
+              rotation 0 0 1 1.57
+              children [
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0 1 0
+                  }
+                  endPoint Solid {
+                    children [
+                      Shape {
+                        appearance PBRAppearance {
+                          roughness 1
+                          metalness 0
+                        }
+                        geometry Cylinder {
+                          height 0.01
+                          radius 0.005
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
             }
           ]
         }
