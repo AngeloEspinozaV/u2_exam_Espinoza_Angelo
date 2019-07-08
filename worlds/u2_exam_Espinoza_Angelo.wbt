@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.4349492529667369 0.8749433965591233 0.2128219917237455 0.9904264650142386
-  position 2.1709550135038223 1.4095378268233523 1.7283236357165013
+  orientation -0.17932661906995007 -0.9627322793512074 -0.2024562223992376 1.729421649417343
+  position -0.8729356255280274 0.3763840918816852 -0.10270211306598931
 }
 TexturedBackground {
 }
@@ -12,14 +12,44 @@ TexturedBackgroundLight {
 Floor {
 }
 Robot {
+  translation 0 0.05 0
   children [
     DEF BODY_GR Group {
       children [
-        Shape {
-          appearance PBRAppearance {
-            roughness 1
-            metalness 0
-          }
+        Transform {
+          translation 0 0 0.06495
+          rotation 0 1 0 0.523583333
+          children [
+            Shape {
+              appearance DEF COLOR_BODY_ROBOT PBRAppearance {
+                roughness 1
+                metalness 0
+              }
+              geometry DEF GEOMETRY_BODY_ROBOT Box {
+                size 0.25 0.05 0.005
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 -0.06495
+          rotation 0 1 0 -0.523583
+          children [
+            Shape {
+              appearance USE COLOR_BODY_ROBOT
+              geometry USE GEOMETRY_BODY_ROBOT
+            }
+          ]
+        }
+        Transform {
+          translation -0.111 0 0
+          rotation 0 1 0 1.57
+          children [
+            Shape {
+              appearance USE COLOR_BODY_ROBOT
+              geometry USE GEOMETRY_BODY_ROBOT
+            }
+          ]
         }
       ]
     }
