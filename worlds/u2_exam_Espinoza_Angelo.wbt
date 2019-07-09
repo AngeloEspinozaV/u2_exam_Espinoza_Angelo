@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.9329101289931773 -0.3185127848141416 -0.16801278859620702 5.253966730364249
-  position 0.25069077363243975 0.7329577460495623 0.4151049134280512
+  orientation -0.16056108121485962 -0.9682432383733942 -0.19163812392975893 1.7784930776291714
+  position -7.032741300377102 3.8740206624506115 -1.5687409498556395
   follow "robot"
 }
 TexturedBackground {
@@ -11,6 +11,7 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 Floor {
+  size 5 5
 }
 Robot {
   translation 0 0.05 0
@@ -701,7 +702,7 @@ Robot {
         }
       ]
     }
-    DistanceSensor {
+    DEF DISTANCE_SENSOR_RIGHT DistanceSensor {
       translation -0.115 0 -0.05
       rotation 0 1 0 3.14159
       children [
@@ -721,13 +722,14 @@ Robot {
           ]
         }
       ]
+      name "distance_sensor1"
       lookupTable [
         0 0 0
-        0.2 65536 0
+        0.2 65535 0
       ]
       resolution 1
     }
-    DistanceSensor {
+    DEF DISTANCE_SENSOR_RIGHT DistanceSensor {
       translation -0.115 0 0.05
       rotation 0 1 0 3.14159
       children [
@@ -738,10 +740,10 @@ Robot {
           ]
         }
       ]
-      name "distance sensor(1)"
+      name "distance_sensor2"
       lookupTable [
         0 0 0
-        0.2 65536 0
+        0.2 65535 0
       ]
     }
   ]
@@ -753,4 +755,45 @@ Robot {
     ]
   }
   controller "u3_exam_Espinoza_Angelo"
+}
+Solid {
+  translation 0 0.25 -2.5
+  children [
+    DEF WALLS_SH Shape {
+      appearance PBRAppearance {
+        baseColor 0.5607843137254902 0.34901960784313724 0.00784313725490196
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 5 0.5 0.05
+      }
+    }
+  ]
+  boundingObject USE WALLS_SH
+}
+Solid {
+  translation -2.5 0.25 0
+  rotation 0 1 0 1.57
+  children [
+    USE WALLS_SH
+  ]
+  name "solid(1)"
+  boundingObject USE WALLS_SH
+}
+Solid {
+  translation 0 0.25 2.5
+  children [
+    USE WALLS_SH
+  ]
+  name "solid(2)"
+  boundingObject USE WALLS_SH
+}
+Solid {
+  translation 2.5 0.25 0
+  rotation 0 1 0 1.57
+  children [
+    USE WALLS_SH
+  ]
+  name "solid(3)"
 }

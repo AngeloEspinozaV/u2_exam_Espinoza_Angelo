@@ -6,58 +6,86 @@
  * Modifications:
  */
 
-/*
- * You may need to add include files like <webots/distance_sensor.h> or
- * <webots/differential_wheels.h>, etc.
- */
+/* WEBOTS LIBRARIES */
 #include <webots/robot.h>
 #include <webots/motor.h> 
 #include <webots/keyboard.h>
+#include <webots/distance_sensor.h>
+#include <webots/position_sensor.h>
 
+/* C LIBRARIES */
 #include <stdio.h>
 
-/*
- * You may want to add macros here.
- */
+/* MACROS */
 #define TIME_STEP 64
 
-/*
- * This is the main program.
- * The arguments of the main function can be specified by the
- * "controllerArgs" field of the Robot node
- */
+
 int main(int argc, char **argv)
 {
   /* necessary to initialize webots stuff */
   wb_robot_init();
 
-  /*
+      /*
    * You should declare here WbDeviceTag variables for storing
    * robot devices like this:
    *  WbDeviceTag my_sensor = wb_robot_get_device("my_sensor");
    *  WbDeviceTag my_actuator = wb_robot_get_device("my_actuator");
    */
    /* IMPORTING MOTORS */
-   WbDeviceTag motor_1 = wb_robot_get_device("motor1");
-   WbDeviceTag motor_2 = wb_robot_get_device("motor2");
-   WbDeviceTag motor_3 = wb_robot_get_device("motor3"); 
+    WbDeviceTag motor_1 = wb_robot_get_device("motor1");
+    WbDeviceTag motor_2 = wb_robot_get_device("motor2");
+    WbDeviceTag motor_3 = wb_robot_get_device("motor3"); 
    
    /* SETTING POSITION OF THE MOTORS */
-   wb_motor_set_position(motor_1, INFINITY);
-   wb_motor_set_position(motor_2, INFINITY); 
-   wb_motor_set_position(motor_3, INFINITY);
-         
-  /* main loop
-   * Perform simulation steps of TIME_STEP milliseconds
-   * and leave the loop when the simulation is over
-   */
+    wb_motor_set_position(motor_1, INFINITY);
+    wb_motor_set_position(motor_2, INFINITY); 
+    wb_motor_set_position(motor_3, INFINITY);
    
+   /* IMPORTING DISTANCE SENSORS */
+    WbDeviceTag distance_sensor1 = wb_robot_get_device("distance_sensor1");         
+    WbDeviceTag distance_sensor2 = wb_robot_get_device("distance_sensor2");         
+     
+   /* ENABLING ENCODERS */
+    wb_distance_sensor_enable(distance_sensor1, TIME_STEP);
+    wb_distance_sensor_enable(distance_sensor2, TIME_STEP);
+    
+   /* IMPORTING POSITION SENSOR */
+    WbDeviceTag position_sensor1 = wb_robot_get_device("position_sensor1");
+    WbDeviceTag position_sensor2 = wb_robot_get_device("position_sensor2");
+    WbDeviceTag position_sensor3 = wb_robot_get_device("position_sensor3");
+   
+   /* ENABLING POSITION SENSORS */
+    wb_position_sensor_enable(position_sensor1, TIME_STEP);
+    wb_position_sensor_enable(position_sensor2, TIME_STEP); 
+    wb_position_sensor_enable(position_sensor3, TIME_STEP); 
+       
    /* ENABLING THE KEYBOARD */
-   wb_keyboard_enable(TIME_STEP); 
-   
-   int key;
-   
+    wb_keyboard_enable(TIME_STEP); 
+       
+   /* VARIABLES */
+    int key;
+    
+    double distance_sensor_value1;
+    double distance_sensor_value2;
+    
+    double position_sensor_value1;   
+    double position_sensor_value2;
+    double position_sensor_value3;    
+    
   while (wb_robot_step(TIME_STEP) != -1) {
+      
+      distance_sensor_value1 = wb_distance_sensor_get_value(distance_sensor1);
+      distance_sensor_value2 = wb_distance_sensor_get_value(distance_sensor2);
+      printf("Distance sensor right value is: %.4f\n", distance_sensor_value1);
+      printf("Distance sensor left value is: %.4f\n", distance_sensor_value2);
+
+      position_sensor_value1 = wb_position_sensor_get_value(position_sensor1);
+      position_sensor_value2 = wb_position_sensor_get_value(position_sensor2);
+      position_sensor_value3 = wb_position_sensor_get_value(position_sensor3);
+      
+      printf("Position sensor wheel 1 is: %.4f\n", position_sensor_value1);
+      printf("Position sensor wheel 2 is: %.4f\n", position_sensor_value2);
+      printf("Position sensor wheel 3 is: %.4f\n", position_sensor_value3);
       
       
       key = wb_keyboard_get_key();
