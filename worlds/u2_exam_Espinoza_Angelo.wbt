@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.16056108121485962 -0.9682432383733942 -0.19163812392975893 1.7784930776291714
-  position -7.032741300377102 3.8740206624506115 -1.5687409498556395
+  orientation -0.5027847307056661 -0.7478235378103144 -0.4335521547243146 1.712755341792671
+  position -1.3615375429426735 1.3995440147669942 0.14880639143307384
   follow "robot"
 }
 TexturedBackground {
@@ -14,8 +14,8 @@ Floor {
   size 5 5
 }
 Robot {
-  translation 0 0.05 0
-  rotation 0 1 0 3.141592
+  translation -1 0.045 0
+  rotation 0 1 0 3.09
   children [
     DEF BODY_GR Group {
       children [
@@ -766,7 +766,7 @@ Solid {
         metalness 0
       }
       geometry Box {
-        size 5 0.5 0.05
+        size 5 0.5 0.001
       }
     }
   ]
@@ -796,4 +796,41 @@ Solid {
     USE WALLS_SH
   ]
   name "solid(3)"
+  boundingObject USE WALLS_SH
+}
+Solid {
+  translation 0 0.25 -0.1
+  children [
+    DEF OBSTACLE1_SH Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0 0
+        roughness 1
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.5
+        radius 0.1
+      }
+    }
+  ]
+  name "solid(4)"
+  boundingObject USE OBSTACLE1_SH
+}
+Solid {
+  translation 0.34585057468027935 0.1 0.7219955246257075
+  rotation 0 -1 0 5.5
+  children [
+    DEF OBSTACLE2_SH Shape {
+      appearance PBRAppearance {
+        baseColor 0.9882352941176471 0.9137254901960784 0.30980392156862746
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.2 0.2 0.2
+      }
+    }
+  ]
+  name "solid(5)"
+  boundingObject USE OBSTACLE2_SH
 }

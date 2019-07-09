@@ -18,7 +18,10 @@
 
 /* MACROS */
 #define TIME_STEP 64
+#define MAX_BITS 65535
 
+/* PROTOFUNCTIONS */
+float bitsToCentimeters(float centimeters);
 
 int main(int argc, char **argv)
 {
@@ -72,6 +75,8 @@ int main(int argc, char **argv)
     double position_sensor_value2;
     double position_sensor_value3;    
     
+    float desired_centimeters = bitsToCentimeters(17);
+    
   while (wb_robot_step(TIME_STEP) != -1) {
       
       distance_sensor_value1 = wb_distance_sensor_get_value(distance_sensor1);
@@ -87,36 +92,51 @@ int main(int argc, char **argv)
       printf("Position sensor wheel 2 is: %.4f\n", position_sensor_value2);
       printf("Position sensor wheel 3 is: %.4f\n", position_sensor_value3);
       
-      
       key = wb_keyboard_get_key();
+      
+      /* MOVE FORWARD */
+      if ((distance_sensor_value1 > desired_centimeters) && (distance_sensor_value2 > desired_centimeters)) {
 
-      if (key == WB_KEYBOARD_UP) {
-       wb_motor_set_velocity(motor_1, 5);
-       wb_motor_set_velocity(motor_2, 5);
-       wb_motor_set_velocity(motor_3, 0);
+         wb_motor_set_velocity(motor_1, 1);
+         wb_motor_set_velocity(motor_2, 1);
+         wb_motor_set_velocity(motor_3, 0);
       }
-            
-      else if (key == WB_KEYBOARD_DOWN) {
-       wb_motor_set_velocity(motor_1, -5);
-       wb_motor_set_velocity(motor_2, -5);
-       wb_motor_set_velocity(motor_3, 0);
+      
+      /* STOP */      
+      else if ((distance_sensor_value1 == desired_centimeters) && (distance_sensor_value2 == desired_centimeters)) {
+         wb_motor_set_velocity(motor_1, 0);
+         wb_motor_set_velocity(motor_2, 0);
+         wb_motor_set_velocity(motor_3, 0);
       }
-
-      else if (key == WB_KEYBOARD_LEFT) {
-       wb_motor_set_velocity(motor_1, 5);
-       wb_motor_set_velocity(motor_2, -5);
-       wb_motor_set_velocity(motor_3, 8.66);
+      
+      /* MOVE RIGHT AROUND A PIVOT */
+      else if((distance_sensor_value1 < desired_centimeters) && (distance_sensor_value2 < desired_centimeters)) {
+         wb_motor_set_velocity(motor_1, 0);
+         wb_motor_set_velocity(motor_2, -2);
+         wb_motor_set_velocity(motor_3, -2); 
       }
-      else if (key == WB_KEYBOARD_RIGHT) {
-       wb_motor_set_velocity(motor_1, -5);
-       wb_motor_set_velocity(motor_2, 5);
-       wb_motor_set_velocity(motor_3, -8.66);
-      }      
-      else {
-       wb_motor_set_velocity(motor_1, 0);
-       wb_motor_set_velocity(motor_2, 0);
-       wb_motor_set_velocity(motor_3, 0);
+      
+      /* AVOID OBSTACLES LEFT */
+      else if(distance_sensor_value2 <= desired_centimeters) {
+         wb_motor_set_velocity(motor_1, 0);
+         wb_motor_set_velocity(motor_2, 3);
+         wb_motor_set_velocity(motor_3, 3); 
       }
+      /* AVOID OBSTACLES RIGHT */
+      else if(distance_sensor_value1 <= desired_centimeters) {
+         wb_motor_set_velocity(motor_1, 3);
+         wb_motor_set_velocity(motor_2, 0);
+         wb_motor_set_velocity(motor_3, -3); 
+      }      // else {
+       // wb_motor_set_velocity(motor_1, 0);
+       // wb_motor_set_velocity(motor_2, 0);
+       // wb_motor_set_velocity(motor_3, 0);
+      // }      
+      // else {
+       // wb_motor_set_velocity(motor_1, 0);
+       // wb_motor_set_velocity(motor_2, 0);
+       // wb_motor_set_velocity(motor_3, 0);
+      // }
     /*
      * Read the sensors :
      * Enter here functions to read sensor data, like:
@@ -138,3 +158,10 @@ int main(int argc, char **argv)
 
   return 0;
 }
+
+float bitsToCentimeters(float centimeters) {
+    
+    return (MAX_BITS*centimeters)/(20);
+    
+    }
+

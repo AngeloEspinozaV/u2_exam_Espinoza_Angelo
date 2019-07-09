@@ -25,8 +25,18 @@ The distance sensors contain a shape of a cube of dimension 0.01 x 0.01 x 0.01. 
 
 				resolution = 2^(bit) - 1
 Giving as result resolution = 65535 which will be put together with the maximum distance that the sensor can read (0.2m). 
+
 				x = 0    y = 0     z = 0
 				x = 0.2  y = 65535 z = 0
+
+
 This lookupTable for both distace sensor.In this way sensing from 0 (the start of the sensor) to the end of it.
 
+
+JUSTIFICATION: 
+
+The velocity chose variate from condition to condition since the sizes of the robot were not the best with the respect to the requested sensors, therefore I struggled a lot at the time of programming. A clear example appeared in a simple movement, when I did the test just trying to avoid the walls, apparently given that the distance sensor measures up to 0.2m and given that each side of the robot are 0.25m x 0.05m x 0.005m the robot struggle a lot when is turning around (either left or right).
+Nevertheless, I tried to program the best trajectory so that the motors work faster in some moments and slower in others, in this way having a balance. 
+At the moment the robot can dodge the two obstacles, however and given the last justification the wheels get stucked a little bit, the same at the time of reaching the walls, the robot struggles at the moment of turning around a corner.
+In order to solve these problems it is proposed to consider another distance sensor as the last worked (HC-SR04), however the solution can also be modifying the robot (its measures) in order to get a better proprotionated robot and for instance a better turn.
 
