@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.6418471979366382 -0.7148284980633823 -0.2775831278326098 5.195001051387803
-  position 0.4607677664071001 0.49482802864447484 0.36763769509124705
+  orientation 0.9329101289931773 -0.3185127848141416 -0.16801278859620702 5.253966730364249
+  position 0.25069077363243975 0.7329577460495623 0.4151049134280512
   follow "robot"
 }
 TexturedBackground {
@@ -721,6 +721,11 @@ Robot {
           ]
         }
       ]
+      lookupTable [
+        0 0 0
+        0.2 65536 0
+      ]
+      resolution 1
     }
     DistanceSensor {
       translation -0.115 0 0.05
@@ -734,6 +739,10 @@ Robot {
         }
       ]
       name "distance sensor(1)"
+      lookupTable [
+        0 0 0
+        0.2 65536 0
+      ]
     }
   ]
   boundingObject USE BODY_GR

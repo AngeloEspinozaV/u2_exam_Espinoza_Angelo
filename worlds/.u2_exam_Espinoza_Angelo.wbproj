@@ -9,4 +9,4 @@ selectionDisabled: 0
 viewpointLocked: 0
 orthographicViewHeight: 1
 textFiles: 0 "controllers/u3_exam_Espinoza_Angelo/u3_exam_Espinoza_Angelo.c"
-globalOptionalRendering: LightSensorRays::CoordinateSystem::JointAxes
+globalOptionalRendering: LightSensorRays::CoordinateSystem::JointAxes::DistanceSensorRays
