@@ -26,7 +26,7 @@ float bitsToCentimeters(float centimeters);
 int main(int argc, char **argv)
 {
   
-  wb_robot_init();v
+  wb_robot_init();
 
    /* IMPORTING MOTORS */
     WbDeviceTag motor_1 = wb_robot_get_device("motor1");

@@ -32,6 +32,12 @@ Giving as result resolution = 65535 which will be put together with the maximum 
 
 This lookupTable for both distace sensor.In this way sensing from 0 (the start of the sensor) to the end of it.
 
+Also, a function was created, this in order to "convert" the bits to centimeters, and so the functions returns a value in bits, this with the intention of justa giving the parameter, this was possible thanks to a three rule. This also was helpful for the point where is requiered to stop and move the robot at 17 cm. So that the three rule is like this:
+
+			bitsToCentimeters = (desiredCentimeters · 65535 bits)/(20 cm)
+
+In this case for 17cm the result was 55704.75 bits, however the functions thanks to the rule of three can compute any bit at any centimeter. 
+
 
 JUSTIFICATION: 
 
