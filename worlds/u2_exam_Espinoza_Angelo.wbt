@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.49919830062800835 -0.7024877090552823 -0.5072593767259206 1.9318336527241347
-  position -0.25643929673076227 0.865280643611094 0.07462487203597634
+  orientation 0.6418471979366382 -0.7148284980633823 -0.2775831278326098 5.195001051387803
+  position 0.4607677664071001 0.49482802864447484 0.36763769509124705
   follow "robot"
 }
 TexturedBackground {
@@ -95,7 +95,7 @@ Robot {
                 }
                 PositionSensor {
                   name "position_sensor1"
-                  resolution 1
+                  resolution 0.003848528
                 }
               ]
               endPoint Solid {
@@ -314,7 +314,7 @@ Robot {
                 }
                 PositionSensor {
                   name "position_sensor2"
-                  resolution 1
+                  resolution 0.003848528
                 }
               ]
               endPoint Solid {
@@ -514,7 +514,7 @@ Robot {
                 }
                 PositionSensor {
                   name "position_sensor3"
-                  resolution 1
+                  resolution 0.003848528
                 }
               ]
               endPoint Solid {
@@ -700,6 +700,40 @@ Robot {
           ]
         }
       ]
+    }
+    DistanceSensor {
+      translation -0.115 0 -0.05
+      rotation 0 1 0 3.14159
+      children [
+        Transform {
+          rotation 0 1 0 -0.0872665
+          children [
+            DEF DISTANCE_SENSOR_SH Shape {
+              appearance PBRAppearance {
+                baseColor 0.9882352941176471 0.9137254901960784 0.30980392156862746
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.01 0.01 0.01
+              }
+            }
+          ]
+        }
+      ]
+    }
+    DistanceSensor {
+      translation -0.115 0 0.05
+      rotation 0 1 0 3.14159
+      children [
+        Transform {
+          rotation 0 1 0 0.0872665
+          children [
+            USE DISTANCE_SENSOR_SH
+          ]
+        }
+      ]
+      name "distance sensor(1)"
     }
   ]
   boundingObject USE BODY_GR
